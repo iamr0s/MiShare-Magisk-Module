@@ -1,0 +1,7 @@
+id=MiShare
+name=小米快传
+version=v1.4
+versionCode=4
+author=r0san
+description=让原生系统用上小米快传。需要同时安装MIUI-CORE。二改需获得本人授权。
+updateJson=https://raw.githubusercontent.com/iamr0s/XposedMiShare/main/workbench/magisk/update.json

@@ -1,0 +1,81 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Build Magisk Module
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Workflows Info
+        id: workflows_info
+        run: |
+          echo "::set-output name=sha::$(git rev-parse HEAD)"
+          echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
+          echo "::set-output name=version_code::$(grep "versionCode=" module/module.prop | cut -d'=' -f2)"
+          echo "::set-output name=version_name::$(grep "version=" module/module.prop | cut -d'=' -f2)"
+
+      - name: Build Magisk Module
+        run: |
+          python build.py
+
+      - name: Create A New Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        with:
+          tag_name: ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
+          release_name: ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
+          body: |
+            ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
+          draft: false
+          prerelease: true
+
+      - name: Upload Magisk Module To Release Asset
+        id: upload_module
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: cache/module.zip
+          asset_name: MiShare-Magisk-Module.zip
+          asset_content_type: application/zip
+
+      - name: set update.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          DOWNLOAD_URL: ${{ steps.upload_module.outputs.browser_download_url }}
+          VERSION_CODE: ${{ steps.workflows_info.outputs.version_code }}
+          VERSION_NAME: ${{ steps.workflows_info.outputs.version_name }}
+        run: |
+          python set-update.py $DOWNLOAD_URL $VERSION_CODE $VERSION_NAME > ./update.json
+
+      - name: Update Repository
+        run: |
+          git config --global user.email actions@github.com
+          git config --global user.name actions@github
+          git add .
+          git commit -m "make a new update.json by actions@github"
+          git push -u origin
