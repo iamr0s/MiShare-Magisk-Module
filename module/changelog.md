@@ -1,4 +1,4 @@
-### v1.5-9007aae-2203380978
+### v1.7
 
 更换实现方式为`Lspatch`实现，关于什么是`Lspatch`请参考：https://github.com/LSPosed/LSPatch。
 
