@@ -4,4 +4,4 @@ version=v1.5
 versionCode=5
 author=r0san
 description=让原生系统用上小米快传。需要同时安装MIUI-CORE。二改需获得本人授权。
-updateJson=https://raw.githubusercontent.com/iamr0s/XposedMiShare/main/workbench/magisk/update.json
+updateJson=https://github.com/iamr0s/MiShare-Magisk-Module/raw/v1.5-9007aae-2203380978/update.json
