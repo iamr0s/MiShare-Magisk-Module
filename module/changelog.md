@@ -1,3 +1,9 @@
+### v1.9
+
+更多的lspatch打包签名
+
+自动的悬浮窗权限检测
+
 ### v1.8
 
 具体变更请参考：https://github.com/iamr0s/XposedMiShare/commit/3be92ab4eab1116f27e552bb8e4d730f2116af20
