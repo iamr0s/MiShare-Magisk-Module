@@ -45,10 +45,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         with:
-          tag_name: ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
-          release_name: ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
+          tag_name: ${{ steps.workflows_info.outputs.version_name }}-${{ github.run_id }}-${{ steps.workflows_info.outputs.sha }}
+          release_name: ${{ steps.workflows_info.outputs.version_name }}-${{ github.run_id }}-${{ steps.workflows_info.outputs.sha }}
           body: |
-            ${{ steps.workflows_info.outputs.version_name }}-${{ steps.workflows_info.outputs.short_sha }}-${{ github.run_id }}
+            ${{ steps.workflows_info.outputs.version_name }}-${{ github.run_id }}-${{ steps.workflows_info.outputs.sha }}
           draft: false
           prerelease: true
 
