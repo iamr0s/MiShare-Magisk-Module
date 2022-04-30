@@ -1,20 +1,8 @@
-### v1.9
+### v2.0
 
-更多的lspatch打包签名
+小米快传的bindService只有在强行停止后第一次有效，严重影响使用，具体原因未知，欢迎提交PR解决。
 
-自动的悬浮窗权限检测
-
-### v1.8
-
-具体变更请参考：https://github.com/iamr0s/XposedMiShare/commit/3be92ab4eab1116f27e552bb8e4d730f2116af20
-
-fix lspatch XPOSEDMODULE_PATH
-
-### v1.7
-
-更换实现方式为`Lspatch`实现，关于什么是`Lspatch`请参考：https://github.com/LSPosed/LSPatch。
-
-具体实现请参考：https://github.com/iamr0s/XposedMiShare。
-
-修复全局弹出对话框。
-新增完全自定义设备名称。
+增加签名方式：v1,v2,v3
+将所有activity设置export为true
+新增主页activity和分享activity
+分享页支持搜索周围设备（具体发送未实现）
