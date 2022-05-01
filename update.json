@@ -1,6 +1,6 @@
 {
-  "version": "v2.0",
-  "versionCode": 10,
-  "zipUrl": "https://github.com/iamr0s/MiShare-Magisk-Module/releases/download/v2.0-2250873041-9ceca55/MiShare-Magisk-Module.zip",
+  "version": "v2.1",
+  "versionCode": 11,
+  "zipUrl": "https://github.com/iamr0s/MiShare-Magisk-Module/releases/download/v2.1-2253953614-29843d6/MiShare-Magisk-Module.zip",
   "changelog": "https://raw.githubusercontent.com/iamr0s/MiShare-Magisk-Module/main/module/changelog.md"
 }
