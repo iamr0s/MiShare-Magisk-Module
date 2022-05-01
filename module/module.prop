@@ -1,7 +1,7 @@
 id=MiShare
 name=小米快传
-version=v2.1
-versionCode=11
+version=v2.0
+versionCode=10
 author=r0san
 description=让原生系统用上小米快传。需要同时安装MIUI-CORE。二改需获得本人授权。
 updateJson=https://raw.githubusercontent.com/iamr0s/MiShare-Magisk-Module/main/update.json
